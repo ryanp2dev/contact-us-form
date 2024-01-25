@@ -17,6 +17,10 @@ const $inputCidade = $("#cidade")
 const $inputCep = $("#cep")
 const $containerBtnFormTwo = $('#containerBtnFormTwo')
 const $btnFormTwo = $('#btnFormTwo')
+const $inputHabilidades = $("#habilidades")
+const $inputPontosForte= $("#pontosForte")
+const $containerBtnFormThree = $('#containerBtnFormThree')
+const $btnFormThree = $('#btnFormThree')
 
 let nomeValido = false;
 let sobreNomeValido = false;
@@ -25,6 +29,9 @@ let emailValido = false;
 let cidadeValido = false;
 let enderecoValido = false;
 let cepValido = false;
+let habilidadesvalido = false;
+let pontosFortesvalido = false;
+
 
 const minLengthText = 2
 maxLengthTextArea = 10
@@ -104,10 +111,35 @@ function validarFormularioDois(){
 
 function iniciarFormulario3() {
     $stepText.text("Passo 3 de 3 - Conte-nos sobre você")
-    $stepDescription.text("Precisamos desses dados para entra em contato.")
+    $stepDescription.text("Nao economize palavra, aqui é onde você pode se destacar.")
     $stepOne.hide();
     $stepTwo.hide();
     $stepThree.show();
+
+    $inputHabilidades.keyup(function(){
+      habilidadesvalido =  validarInput(this,maxLengthTextArea)
+      validarFormularioTres()
+
+    })
+
+    $inputPontosForte.keyup(function(){
+        pontosFortesvalido =validarInput(this,maxLengthTextArea)
+        validarFormularioTres()
+    })
+}
+
+
+function validarFormularioTres(){
+    if(habilidadesvalido && pontosFortesvalido){
+        $containerBtnFormThree.removeClass('disabled')
+        $btnFormThree.removeClass('disabled')
+        $btnFormThree.off('click').on('click', console.log("proxima pagina"))
+
+    }else{
+        $containerBtnFormThree.addClass('disabled')
+        $btnFormThree.addClass('disabled')
+        $btnFormThree.off('click')
+    }
 }
 
 function init() {
