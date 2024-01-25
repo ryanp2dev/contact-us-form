@@ -21,6 +21,8 @@ const $inputHabilidades = $("#habilidades")
 const $inputPontosForte= $("#pontosForte")
 const $containerBtnFormThree = $('#containerBtnFormThree')
 const $btnFormThree = $('#btnFormThree')
+const $title = $('#title')
+
 
 let nomeValido = false;
 let sobreNomeValido = false;
@@ -133,13 +135,22 @@ function validarFormularioTres(){
     if(habilidadesvalido && pontosFortesvalido){
         $containerBtnFormThree.removeClass('disabled')
         $btnFormThree.removeClass('disabled')
-        $btnFormThree.off('click').on('click', console.log("proxima pagina"))
+        $btnFormThree.off('click').on('click', finilazinarFormulario)
 
     }else{
         $containerBtnFormThree.addClass('disabled')
         $btnFormThree.addClass('disabled')
         $btnFormThree.off('click')
     }
+}
+
+
+function finilazinarFormulario(){
+    $stepThree.hide();
+    $stepDescription.hide()
+
+    $title.text('Muito obrigado pela sua inscrição!');
+    $stepText.text('Entraremos em contato assim que possível, nosso prazo médio de resposta é de 5 dias. Fique atento na sua caixa de email.');
 }
 
 function init() {
@@ -187,5 +198,14 @@ function init() {
     })
 
 }
+async function salvarNoTrello(){
+    try {
+        const nome = $inputNome.val();
+        const sobrenome = $inputSobrenome.val()
+    }catch(e){
+        console.log("Ocorreu um erro ao salvatr no trello:",e)
+    }
+}
+
 
 init()
